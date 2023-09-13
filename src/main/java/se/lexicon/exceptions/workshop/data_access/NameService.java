@@ -1,14 +1,13 @@
 package se.lexicon.exceptions.workshop.data_access;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Random;
-
 import se.lexicon.exceptions.workshop.domain.Gender;
 import se.lexicon.exceptions.workshop.domain.Person;
 import se.lexicon.exceptions.workshop.exception.DuplicateNameException;
 import se.lexicon.exceptions.workshop.exception.FileWriteException;
 import se.lexicon.exceptions.workshop.fileIO.CSVReader_Writer;
+
+import java.util.List;
+import java.util.Random;
 
 public class NameService {
 
@@ -88,9 +87,11 @@ public class NameService {
      *
      * @param name
      */
-    public void addMaleFirstName(String name) {
+    public void addMaleFirstName(String name) throws DuplicateNameException {
+        if(maleFirstNames.contains(name)) {
+            throw new DuplicateNameException("Name already exists in the list");
+        }
         maleFirstNames.add(name);
-        CSVReader_Writer.saveMaleNames(maleFirstNames);
     }
 
     /**
@@ -100,9 +101,11 @@ public class NameService {
      *
      * @param lastName
      */
-    public void addLastName(String lastName) {
+    public void addLastName(String lastName) throws DuplicateNameException {
+        if(lastNames.contains(lastName)) {
+            throw new DuplicateNameException("The last name " + lastName + " already exists in the list");
+        }
         lastNames.add(lastName);
-        CSVReader_Writer.saveLastNames(lastNames);
     }
 
 
