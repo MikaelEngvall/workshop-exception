@@ -6,6 +6,7 @@ import se.lexicon.exceptions.workshop.exception.DuplicateNameException;
 import se.lexicon.exceptions.workshop.exception.FileWriteException;
 import se.lexicon.exceptions.workshop.fileIO.CSVReader_Writer;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -64,7 +65,7 @@ public class NameService {
      *
      * @param name
      */
-    public void addFemaleFirstName(String name) throws DuplicateNameException {
+    public void addFemaleFirstName(String name) throws IOException {
         if (femaleFirstNames.contains(name)) {
             throw new DuplicateNameException("Duplicate name: " + name);
         }
@@ -74,7 +75,7 @@ public class NameService {
         } catch (FileWriteException e) {
             // Handle IO exceptions since CSVReader_Writer.saveFemaleNames can throw them now
             // For now, just rethrowing as a runtime exception, but we should handle appropriately
-            throw new RuntimeException("Error saving names", e);
+            throw new IOException("Error saving names", e);
         }
     }
 
@@ -86,9 +87,9 @@ public class NameService {
      *
      * @param name
      */
-    public void addMaleFirstName(String name) throws DuplicateNameException {
+    public void addMaleFirstName(String name) throws IOException {
         if(maleFirstNames.contains(name)) {
-            throw new DuplicateNameException("Name already exists in the list");
+            throw new DuplicateNameException(name + " already exists in the list");
         }
         maleFirstNames.add(name);
         try {
@@ -96,7 +97,7 @@ public class NameService {
         } catch (FileWriteException e) {
             // Handle IO exceptions since CSVReader_Writer.saveMaleNames can throw them now
             // For now, just rethrowing as a runtime exception, but we should handle appropriately
-            throw new RuntimeException("Error saving names", e);
+            throw new IOException("Error saving names", e);
         }
     }
 
@@ -107,7 +108,7 @@ public class NameService {
      *
      * @param lastName
      */
-    public void addLastName(String lastName) throws DuplicateNameException {
+    public void addLastName(String lastName) throws IOException {
         if(lastNames.contains(lastName)) {
             throw new DuplicateNameException("The last name " + lastName + " already exists in the list");
         }
@@ -117,7 +118,7 @@ public class NameService {
         } catch (FileWriteException e) {
             // Handle IO exceptions since CSVReader_Writer.saveLastNames can throw them now
             // For now, just rethrowing as a runtime exception, but we should handle appropriately
-            throw new RuntimeException("Error saving names", e);
+            throw new IOException("Error saving names", e);
         }
     }
 

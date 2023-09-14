@@ -1,12 +1,10 @@
 package se.lexicon.exceptions.workshop.exception;
 
-public class FileWriteException extends Exception{
+import java.io.IOException;
+
+public class FileWriteException extends IOException{
 
     public FileWriteException(String message) {
         super(message);
-    }
-
-    public String friendlyErrorMessage() {
-        return "Something went wrong :D, and this is what happened: " + getMessage();
     }
 }
