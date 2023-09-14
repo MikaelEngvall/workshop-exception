@@ -4,7 +4,6 @@ import se.lexicon.exceptions.workshop.exception.FileWriteException;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -111,7 +110,8 @@ public class CSVReader_Writer {
             }
             writer.flush();
         } catch (IOException e) {
-            throw new FileWriteException("Error writing last names to file: " + e.getMessage()); //FileWriteException class called here
+            throw new FileWriteException("Error writing last names to file: " + e.getMessage());
+            //FileWriteException class called here
         }
     }
 

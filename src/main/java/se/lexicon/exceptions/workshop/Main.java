@@ -1,11 +1,11 @@
 package se.lexicon.exceptions.workshop;
 
-import java.io.IOException;
-import java.util.List;
-
 import se.lexicon.exceptions.workshop.data_access.NameService;
 import se.lexicon.exceptions.workshop.domain.Person;
 import se.lexicon.exceptions.workshop.fileIO.CSVReader_Writer;
+
+import java.io.IOException;
+import java.util.List;
 
 public class Main {
 
@@ -18,11 +18,11 @@ public class Main {
             List<String> lastNames = CSVReader_Writer.getLastNames();
             NameService nameService = new NameService(maleFirstNames, femaleFirstNames, lastNames);
             Person test = nameService.getNewRandomPerson();
+
             System.out.println(test);
         } catch (IOException e) {
             e.printStackTrace(); //Should we keep this, or change it to something else?
         }
 
     }
-
 }

@@ -68,13 +68,12 @@ public class NameService {
         if (femaleFirstNames.contains(name)) {
             throw new DuplicateNameException("Duplicate name: " + name);
         }
-
         femaleFirstNames.add(name);
         try {
             CSVReader_Writer.saveFemaleNames(femaleFirstNames);
         } catch (FileWriteException e) {
-            // Handle IO exceptions if CSVReader_Writer.saveFemaleNames can throw them
-            // For now, just rethrowing as a runtime exception, but you should handle appropriately
+            // Handle IO exceptions since CSVReader_Writer.saveFemaleNames can throw them now
+            // For now, just rethrowing as a runtime exception, but we should handle appropriately
             throw new RuntimeException("Error saving names", e);
         }
     }
@@ -92,6 +91,13 @@ public class NameService {
             throw new DuplicateNameException("Name already exists in the list");
         }
         maleFirstNames.add(name);
+        try {
+            CSVReader_Writer.saveFemaleNames(maleFirstNames);
+        } catch (FileWriteException e) {
+            // Handle IO exceptions since CSVReader_Writer.saveMaleNames can throw them now
+            // For now, just rethrowing as a runtime exception, but we should handle appropriately
+            throw new RuntimeException("Error saving names", e);
+        }
     }
 
     /**
@@ -106,6 +112,13 @@ public class NameService {
             throw new DuplicateNameException("The last name " + lastName + " already exists in the list");
         }
         lastNames.add(lastName);
+        try {
+            CSVReader_Writer.saveFemaleNames(lastNames);
+        } catch (FileWriteException e) {
+            // Handle IO exceptions since CSVReader_Writer.saveLastNames can throw them now
+            // For now, just rethrowing as a runtime exception, but we should handle appropriately
+            throw new RuntimeException("Error saving names", e);
+        }
     }
 
 
